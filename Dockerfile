@@ -1,10 +1,9 @@
 # Etapa de construcción
 FROM php:8.1-fpm
 
-# Este es un comentario para forzar la detección de cambios
-
 # Instalar dependencias necesarias
 RUN apt-get update && apt-get install -y \
+    nginx \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
@@ -35,4 +34,4 @@ COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 
 # Arrancar Nginx y PHP-FPM
-CMD service nginx start && php-fpm
+CMD ["sh", "-c", "service nginx start && php-fpm"]
